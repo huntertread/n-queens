@@ -78,12 +78,43 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+
     hasRowConflictAt: function(rowIndex) {
+      // input - array
+      // output - boolean
+      // create a count variable
+      var count = 0;
+      // iterate through rowIndex
+      for (var i = 0; i < rowIndex.length; i++) {
+        // if value at index equals 1
+        if (rowIndex[i] === 1) {
+          // increment count variable
+          count++;
+        }
+      }
+      // if count > 1
+      if (count > 1) {
+        return true;
+      }
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      debugger;
+      var board = this.rows();
+      // variable for rowConflict
+      var rowConflict;
+      // iterate through the board
+      for (var i = 0; i < board.length; i++) {
+        // run hasRowConflict on each index of board
+        rowConflict = this.hasRowConflictAt(board[i]);
+        // if rowClinfict === false
+        if (rowConflict === true) {
+          return true;
+        }
+      }
+      //if for loop ends, it means it did not find any row conflicts. Thus, return true.
       return false; // fixme
     },
 
