@@ -124,9 +124,9 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      var board = this.row();
+      var board = this.rows();
       //create count variable
-      var countVar;
+      var countVar = 0;
       //for loop iteration over board
       for (var i = 0; i < board.length; i++) {
         //get row equal to board[i]
@@ -150,9 +150,9 @@
     hasAnyColConflicts: function() {
       debugger;
 
-      this.hasColConflictAt(3);
+      //this.hasColConflictAt(3);
       var board = this.rows();
-      // this.hasColConflictAt(8);
+      //this.hasColConflictAt(0);
       // create an indexStorage variable
       var indexStorage;
       var indexValue;
@@ -160,6 +160,7 @@
       var row;
       // iterate over the boards first row
       for (var i = 0; i < board.length; i++) {
+        //this.hasColConflictAt(3);
         row = board[i];
         for (var j = 0; j < row.length; j++) {
           // if any index value equals 1
@@ -178,7 +179,7 @@
         }
       }
 
-      // if no match is found return false
+      // // if no match is found return false
       return false; // fixme
     },
 
