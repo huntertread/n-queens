@@ -80,7 +80,7 @@
     // test if a specific row on this board contains a conflict
 
     hasRowConflictAt: function(rowIndex) {
-      // input - array
+      // input - array index
       // output - boolean
       // create a count variable
       var count = 0;
@@ -101,7 +101,6 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      debugger;
       var board = this.rows();
       // variable for rowConflict
       var rowConflict;
@@ -125,11 +124,61 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var board = this.row();
+      //create count variable
+      var countVar;
+      //for loop iteration over board
+      for (var i = 0; i < board.length; i++) {
+        //get row equal to board[i]
+        var row = board[i];
+        //if row[colIndex] = 1
+        if (row[colIndex] === 1) {
+          //increase count
+          countVar++;
+        }
+      }
+      //if count is more than 1
+      if (countVar > 1) {
+        //return true
+        return true;
+      }
+      //else, return false
+      return false;
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
+      debugger;
+
+      this.hasColConflictAt(3);
+      var board = this.rows();
+      // this.hasColConflictAt(8);
+      // create an indexStorage variable
+      var indexStorage;
+      var indexValue;
+      var colConflict;
+      var row;
+      // iterate over the boards first row
+      for (var i = 0; i < board.length; i++) {
+        row = board[i];
+        for (var j = 0; j < row.length; j++) {
+          // if any index value equals 1
+          indexValue = row[j];
+          if (indexValue === 1) {
+            // set indexStorage variable to the matching index
+            indexStorage = j;
+            // console.log(indexStorage);
+            // check the other rows at the indexStorage index for value 1
+            colConflict = this.hasColConflictAt(indexStorage);
+          }
+          // if a value of 1 is found at index
+          if (colConflict === true) {
+            return true;
+          }
+        }
+      }
+
+      // if no match is found return false
       return false; // fixme
     },
 

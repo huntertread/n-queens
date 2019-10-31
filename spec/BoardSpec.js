@@ -37,6 +37,7 @@ describe('Board', function() {
     ]);
   });
 
+  debugger;
   describe('Board with col conflicts', function() {
     verifyConflictTypes(['col', 'rooks', 'queens'], [
       [1, 0, 0, 0],
