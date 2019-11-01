@@ -62,14 +62,13 @@
     },
 
 
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
     \__ \ || (_| | |  | |_  | | | |  __/ | |  __/_
     |___/\__\__,_|_|   \__| |_| |_|\___|_|  \___(_)
-
- */
+    */
     /*=========================================================================
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
@@ -92,11 +91,11 @@
           count++;
         }
       }
-      // if count > 1
+      // if count is less than 1
       if (count > 1) {
         return true;
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any rows on this board contain conflicts
@@ -148,16 +147,11 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      debugger;
-
       //this.hasColConflictAt(3);
       var board = this.rows();
       //this.hasColConflictAt(0);
       // create an indexStorage variable
-      var indexStorage;
-      var indexValue;
-      var colConflict;
-      var row;
+      var indexStorage, indexValue, colConflict, row;
       // iterate over the boards first row
       for (var i = 0; i < board.length; i++) {
         //this.hasColConflictAt(3);
@@ -190,11 +184,63 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+
+      //variables
+      var board = this.rows();
+      var valueIndexCount = majorDiagonalColumnIndexAtFirstRow;
+      var firstConflict = 0;
+
+
+      //for loop iterates over the board where it i starts at columnindex
+      for (var i = 0; i < board.length; i++) {
+        //if board[i][valueIndexCount] = 1
+        if (board[i][valueIndexCount] === 1) {
+          //for the first 1 found, we are just gonna give it a pass
+          if (firstConflict === 0) {
+            firstConflict++;
+            valueIndexCount++;
+          } else {
+          //return true for every other 1 found
+            return true;
+          }
+        } else if (board[i][valueIndexCount] === 0 && firstConflict === 0) {
+          continue;
+        //else increase valueIndexCount for the next iteration check
+        } else {
+          valueIndexCount++;
+        }
+      }
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+
+      //variables
+      // create a count variable to increment
+      var countVar = 0;
+      //board
+      var board = this.rows();
+      var row, diagonalConflict;
+      //for loop iterates over the board
+      for (var i = 0; i < board.length; i++) {
+        //row = board[i]
+        row = board[i];
+        //for loop to iterate over row => use j
+        for (var j = 0; j < row.length; j++) {
+          //if row[j] = 1
+          if (row[j] === 1) {
+            //pass row[i] and value[j] index to hasmajor... and set that equal to diagonalConflict
+            diagonalConflict = this.hasMajorDiagonalConflictAt(j);
+            //if diagonalConflict = true
+            if (diagonalConflict) {
+              //return true
+              return true;
+            }
+          }
+        }
+      }
+      //return false if diagonalConflict didn't find true
       return false; // fixme
     },
 
@@ -205,11 +251,62 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
+      //variables
+      var board = this.rows();
+      var valueIndexCount = minorDiagonalColumnIndexAtFirstRow;
+      var firstConflict = 0;
+
+      //for loop iterates over the board where it i starts at columnindex
+      for (var i = 0; i < board.length; i++) {
+        //if board[i][valueIndexCount] = 1
+        if (board[i][valueIndexCount] === 1) {
+          //for the first 1 found, we are just gonna give it a pass
+          if (firstConflict === 0) {
+            firstConflict++;
+            valueIndexCount--;
+          } else {
+          //return true for every other 1 found
+            return true;
+          }
+        } else if (board[i][valueIndexCount] === 0 && firstConflict === 0) {
+          continue;
+        //else increase valueIndexCount for the next iteration check
+        } else {
+          valueIndexCount--;
+        }
+      }
       return false; // fixme
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      debugger;
+      //variables
+      // create a count variable to increment
+      var countVar = 0;
+      //board
+      var board = this.rows();
+      var row, diagonalConflict;
+
+      //for loop iterates over the board
+      for (var i = 0; i < board.length; i++) {
+        //row = board[i]
+        row = board[i];
+        //for loop to iterate over row => use j
+        for (var j = 0; j < row.length; j++) {
+          //if row[j] = 1
+          if (row[j] === 1) {
+            //pass row[i] and value[j] index to hasmajor... and set that equal to diagonalConflict
+            diagonalConflict = this.hasMinorDiagonalConflictAt(j);
+            //if diagonalConflict = true
+            if (diagonalConflict) {
+              //return true
+              return true;
+            }
+          }
+        }
+      }
+      //return false if diagonalConflict didn't find true
       return false; // fixme
     }
 
