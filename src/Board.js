@@ -100,6 +100,7 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+
       var board = this.rows();
       // variable for rowConflict
       var rowConflict;
@@ -123,6 +124,7 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+
       var board = this.rows();
       //create count variable
       var countVar = 0;
@@ -147,14 +149,13 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      //this.hasColConflictAt(3);
+
+      // create the board
       var board = this.rows();
-      //this.hasColConflictAt(0);
       // create an indexStorage variable
       var indexStorage, indexValue, colConflict, row;
       // iterate over the boards first row
       for (var i = 0; i < board.length; i++) {
-        //this.hasColConflictAt(3);
         row = board[i];
         for (var j = 0; j < row.length; j++) {
           // if any index value equals 1
@@ -162,7 +163,6 @@
           if (indexValue === 1) {
             // set indexStorage variable to the matching index
             indexStorage = j;
-            // console.log(indexStorage);
             // check the other rows at the indexStorage index for value 1
             colConflict = this.hasColConflictAt(indexStorage);
           }
@@ -172,9 +172,8 @@
           }
         }
       }
-
-      // // if no match is found return false
-      return false; // fixme
+      // if no match is found return false
+      return false;
     },
 
 
@@ -189,7 +188,6 @@
       var board = this.rows();
       var valueIndexCount = majorDiagonalColumnIndexAtFirstRow;
       var firstConflict = 0;
-
 
       //for loop iterates over the board where it i starts at columnindex
       for (var i = 0; i < board.length; i++) {
@@ -216,12 +214,11 @@
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
 
-      //variables
-      // create a count variable to increment
+      // variables
       var countVar = 0;
-      //board
       var board = this.rows();
       var row, diagonalConflict;
+
       //for loop iterates over the board
       for (var i = 0; i < board.length; i++) {
         //row = board[i]
@@ -251,63 +248,62 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      //variables
+
+      // variables
       var board = this.rows();
       var valueIndexCount = minorDiagonalColumnIndexAtFirstRow;
       var firstConflict = 0;
 
-      //for loop iterates over the board where it i starts at columnindex
+      // for loop iterates over the board where it i starts at columnindex
       for (var i = 0; i < board.length; i++) {
-        //if board[i][valueIndexCount] = 1
+        // if board[i][valueIndexCount] = 1
         if (board[i][valueIndexCount] === 1) {
-          //for the first 1 found, we are just gonna give it a pass
+          // for the first 1 found, we are just gonna give it a pass
           if (firstConflict === 0) {
             firstConflict++;
             valueIndexCount--;
           } else {
-          //return true for every other 1 found
+          // return true for every other 1 found
             return true;
           }
         } else if (board[i][valueIndexCount] === 0 && firstConflict === 0) {
           continue;
-        //else increase valueIndexCount for the next iteration check
+        // else decrease valueIndexCount for the next iteration check
         } else {
           valueIndexCount--;
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      debugger;
-      //variables
-      // create a count variable to increment
+
+      // variables
       var countVar = 0;
-      //board
       var board = this.rows();
       var row, diagonalConflict;
 
-      //for loop iterates over the board
+      // iterates over the board
       for (var i = 0; i < board.length; i++) {
-        //row = board[i]
+        // set row variable equal to the current board index
         row = board[i];
-        //for loop to iterate over row => use j
+        // iterate over row
         for (var j = 0; j < row.length; j++) {
-          //if row[j] = 1
+          // if row index equals 1
           if (row[j] === 1) {
-            //pass row[i] and value[j] index to hasmajor... and set that equal to diagonalConflict
+            // pass index (j) to hasMinorDiagonalConflictAt and set the result to diagonalConflict
             diagonalConflict = this.hasMinorDiagonalConflictAt(j);
-            //if diagonalConflict = true
+            // if diagonalConflict = true
             if (diagonalConflict) {
-              //return true
+              // return true
               return true;
             }
           }
         }
       }
       //return false if diagonalConflict didn't find true
-      return false; // fixme
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
